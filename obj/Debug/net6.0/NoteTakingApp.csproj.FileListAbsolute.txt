@@ -1,0 +1,15 @@
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/bin/Debug/net6.0/NoteTakingApp
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/bin/Debug/net6.0/NoteTakingApp.deps.json
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/bin/Debug/net6.0/NoteTakingApp.runtimeconfig.json
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/bin/Debug/net6.0/NoteTakingApp.dll
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/bin/Debug/net6.0/ref/NoteTakingApp.dll
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/bin/Debug/net6.0/NoteTakingApp.pdb
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/obj/Debug/net6.0/NoteTakingApp.csproj.AssemblyReference.cache
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/obj/Debug/net6.0/NoteTakingApp.GeneratedMSBuildEditorConfig.editorconfig
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/obj/Debug/net6.0/NoteTakingApp.AssemblyInfoInputs.cache
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/obj/Debug/net6.0/NoteTakingApp.AssemblyInfo.cs
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/obj/Debug/net6.0/NoteTakingApp.csproj.CoreCompileInputs.cache
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/obj/Debug/net6.0/NoteTakingApp.dll
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/obj/Debug/net6.0/ref/NoteTakingApp.dll
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/obj/Debug/net6.0/NoteTakingApp.pdb
+/home/martysenpai/Programming/C#Projects/NoteTakingApp/obj/Debug/net6.0/NoteTakingApp.genruntimeconfig.cache
