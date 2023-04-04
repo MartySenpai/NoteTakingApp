@@ -6,29 +6,34 @@ internal class Menu
     {
         bool isRunning = true;
 
-        do{
+        do
+        {
+            Console.Clear();
+            string mainMenuMessage = @"
+Please choose an option to proceed:
+W - Write new notes
+R - Read existing notes
+Q - Quit application";
 
-            // Present Menu with options(read, write, save and load).
-            Console.Write(@"Please choose an option to proceed:
-            W - Write new notes
-            R - Read existing notes
-            Q - Quit application
-            ");
+            Console.WriteLine(mainMenuMessage);
 
-            string mainMenuOption = Console.ReadLine();
+            string mainMenuOption = Console.ReadLine() ?? "";
 
-            // Switch for menu handling.
             switch (mainMenuOption.ToLower())
             {
                 case "w":
-                break;
+                    break;
                 case "r":
-                break;
+                    break;
                 case "q":
-                Console.Clear();
-                Console.WriteLine("Goodbye!");
-                isRunning = false;
-                break;
+                    Console.Clear();
+                    Console.WriteLine("Goodbye!");
+                    isRunning = false;
+                    break;
+                default:
+                    Console.WriteLine("Invalid input, press enter to continue and enter a valid key.");
+                    Console.ReadLine();
+                    break;
             }
         } while (isRunning);
     }
