@@ -1,9 +1,7 @@
-﻿using System;
-using NoteTakingApp;
+﻿using NoteTakingApp;
 
-// Welcome user.
-Console.WriteLine("Hello user!");
+Console.WriteLine("Welcome to my basic note-taking application.");
 
-// Swtich menu for app options(read, write, save and load).
+Menu menu = new();
 
-// Refactor when it make sense, don't try to do everything at the start!.
+menu.ShowMainMenu();
