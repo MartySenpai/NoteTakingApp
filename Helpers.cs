@@ -9,11 +9,9 @@ internal class Helpers
         Console.Clear();
         Console.WriteLine("Notes:\n");
 
-        int i = 1;
         foreach (Note note in notes)
         {
-            Console.WriteLine($"{i}.{note.Title} - {note.Date:yy/MM/dd HH:mm:ss}");
-            i++;
+            Console.WriteLine($"{note.ID}.{note.Title} - {note.Date:yyyy/MM/dd HH:mm:ss}");
         }
 
         Console.WriteLine("\nPress any key to return to the main menu");
