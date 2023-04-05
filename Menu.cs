@@ -2,6 +2,8 @@ namespace NoteTakingApp;
 
 internal class Menu
 {
+    NoteEngine noteEngine = new();
+    Helpers helpers = new();
     internal void ShowMainMenu()
     {
         bool isRunning = true;
@@ -9,6 +11,7 @@ internal class Menu
         do
         {
             Console.Clear();
+
             string mainMenuMessage = @"
 Please choose an option to proceed:
 W - Write new notes
@@ -22,8 +25,10 @@ Q - Quit application";
             switch (mainMenuOption.ToLower())
             {
                 case "w":
+                    noteEngine.WriteNote();
                     break;
                 case "r":
+                    helpers.ListNotes();
                     break;
                 case "q":
                     Console.Clear();
