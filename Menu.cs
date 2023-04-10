@@ -3,7 +3,7 @@ namespace NoteTakingApp;
 internal class Menu
 {
     NoteEngine noteEngine = new();
-    Helpers helpers = new();
+    NoteHelpers NoteHelpers = new();
     internal void ShowMainMenu()
     {
         bool isRunning = true;
@@ -28,7 +28,7 @@ Q - Quit application";
                     noteEngine.WriteNote();
                     break;
                 case "r":
-                    helpers.ListNotes();
+                    noteEngine.ReadNote();
                     break;
                 case "q":
                     Console.Clear();

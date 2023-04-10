@@ -1,8 +1,8 @@
 namespace NoteTakingApp;
 
-internal class Helpers
+internal class NoteHelpers
 {
-    internal static List<Note> notes = new();
+    internal List<Note> notes = new();
 
     internal void ListNotes()
     {
