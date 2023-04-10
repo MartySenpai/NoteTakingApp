@@ -9,13 +9,13 @@ internal class NoteEngine
         Note note = new();
 
         Console.Clear();
-        Console.WriteLine("\nPlease give your note a title. The title name will be used when saving your note...\n");
+        Console.WriteLine("\nPlease give your note a title:\n");
         note.Title = Console.ReadLine();
 
         Console.Clear();
         Console.WriteLine($"Title: {note.Title}");
 
-        Console.WriteLine("\nAdd content to your note...\n");
+        Console.WriteLine("\nAdd content to your note:\n");
         note.Content = Console.ReadLine();
         note.Date = DateTime.UtcNow;
 
@@ -34,15 +34,14 @@ internal class NoteEngine
         note.ID = id;
         noteHelpers.notes.Add(note);
 
-        Console.Clear();
-        Console.WriteLine($"Note saved with ID {id}");
+        Console.WriteLine($"\nNote saved with ID: {id}");
         Console.ReadLine();
     }
 
     internal void ReadNote()
     {
         noteHelpers.ListNotes();
-        Console.WriteLine("Please enter the ID for the note you which to read...");
+        Console.WriteLine("\nPlease enter the ID for the note you wish to read...");
 
         string input = Console.ReadLine();
 
@@ -52,8 +51,10 @@ internal class NoteEngine
 
             if (note != null)
             {
-                Console.WriteLine($"Title: {note.Title} - Date: {note.Date}");
-                Console.WriteLine($"Content: {note.Content}");
+                Console.Clear();
+                Console.WriteLine($"Note-ID {note.ID} - Last modified: {note.Date}\n");
+                Console.WriteLine($"Title: {note.Title}\n");
+                Console.WriteLine($"Content:\n{note.Content}\n");
             }
             else
             {
@@ -65,7 +66,12 @@ internal class NoteEngine
             Console.WriteLine("Invalid input for note ID.");
         }
 
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadLine();
+        Console.WriteLine("Press 'E' key to edit the current note, or any other key to return to the main menu...");
+        input = Console.ReadLine();
+
+        if (input.ToLower() == "e")
+        {
+            // Edit functions.
+        }
     }
 }

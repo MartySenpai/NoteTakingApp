@@ -3,7 +3,7 @@ namespace NoteTakingApp;
 internal class Menu
 {
     NoteEngine noteEngine = new();
-    NoteHelpers NoteHelpers = new();
+    
     internal void ShowMainMenu()
     {
         bool isRunning = true;

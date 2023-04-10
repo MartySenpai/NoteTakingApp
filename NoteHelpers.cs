@@ -13,8 +13,5 @@ internal class NoteHelpers
         {
             Console.WriteLine($"{note.ID}.{note.Title} - {note.Date:yyyy/MM/dd HH:mm:ss}");
         }
-
-        Console.WriteLine("\nPress any key to return to the main menu");
-        Console.ReadLine();
     }
 }
