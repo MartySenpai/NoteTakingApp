@@ -3,6 +3,7 @@ namespace NoteTakingApp;
 internal class NoteEngine
 {
     NoteHelpers noteHelpers = new();
+    Note note = new();
 
     internal void WriteNote()
     {
@@ -43,11 +44,12 @@ internal class NoteEngine
         noteHelpers.ListNotes();
         Console.WriteLine("\nPlease enter the ID for the note you wish to read...");
 
-        string input = Console.ReadLine();
+        string inputID = Console.ReadLine();
 
-        if (int.TryParse(input, out int id))
+        // Refactor input and validation to NoteHelpers as a function for reusability.
+        if (int.TryParse(inputID, out int id))
         {
-            Note note = noteHelpers.notes.FirstOrDefault(n => n.ID == id);
+            note = noteHelpers.notes.FirstOrDefault(n => n.ID == id);
 
             if (note != null)
             {
@@ -67,11 +69,62 @@ internal class NoteEngine
         }
 
         Console.WriteLine("Press 'E' key to edit the current note, or any other key to return to the main menu...");
-        input = Console.ReadLine();
+        string returnOrEdit = Console.ReadLine();
 
-        if (input.ToLower() == "e")
+        if (returnOrEdit.ToLower() == "e")
         {
-            // Edit functions.
+            Console.Clear();
+            Console.WriteLine("Editing Mode:\n");
+            Console.WriteLine($"Note-ID {note.ID} - Last modified: {note.Date}\n");
+            Console.WriteLine($"Title: {note.Title}\n");
+            Console.WriteLine($"Content:\n{note.Content}");
+
+            string editedContent = note.Content;
+            int cursorPosition = 0;
+
+            // Refactor to NoteHelpers
+            bool isEditing = true;
+
+            do
+            {
+                Console.SetCursorPosition(cursorPosition, Console.CursorTop - 1);
+                ConsoleKeyInfo pressedKey = Console.ReadKey(true);
+
+                if (pressedKey.Key == ConsoleKey.LeftArrow)
+                {
+                    cursorPosition--;
+                }
+                else if (pressedKey.Key == ConsoleKey.RightArrow)
+                {
+                    cursorPosition++;
+                }
+                else if (pressedKey.Key == ConsoleKey.UpArrow)
+                {
+                    Console.CursorTop--;
+                }
+                else if (pressedKey.Key == ConsoleKey.DownArrow)
+                {
+                    Console.CursorTop++;
+                }
+                else if (pressedKey.Key == ConsoleKey.Backspace)
+                {
+                    editedContent = editedContent.Remove(cursorPosition -1, 1);
+                    cursorPosition--;
+                }
+                else
+                {
+                    editedContent = editedContent.Insert(cursorPosition, pressedKey.KeyChar.ToString());
+                    cursorPosition++;
+                }
+
+                Console.Clear();
+                Console.WriteLine("Editing Mode:\n");
+                Console.WriteLine($"Note-ID {note.ID} - Last modified: {note.Date}\n");
+                Console.WriteLine($"Title: {note.Title}\n");
+                Console.WriteLine($"Content:\n{editedContent}");
+            }
+            while (isEditing);
+            
         }
     }
 }
