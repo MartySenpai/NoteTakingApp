@@ -25,7 +25,7 @@ internal class NoteHelpers
 
         string editedContent = note.Content;
         int cursorPosition = Console.CursorLeft;
-        int cursorRow = Console.CursorTop - editedContent.Split('\n').Length + 1;
+        int cursorRow = Console.CursorTop;
 
         // Refactor to NoteHelpers
         bool isEditing = true;
@@ -35,6 +35,8 @@ internal class NoteHelpers
             Console.SetCursorPosition(cursorPosition, cursorRow);
             ConsoleKeyInfo pressedKey = Console.ReadKey(true);
 
+            int lineStartPosition = ((cursorRow - 7) * Console.WindowWidth) + cursorPosition;
+
             if (pressedKey.Key == ConsoleKey.LeftArrow)
             {
                 if (cursorPosition > 0)
@@ -43,6 +45,7 @@ internal class NoteHelpers
                 }
                 else
                 {
+                    cursorPosition = Console.WindowWidth;
                     cursorRow--;
                 }
             }
@@ -54,8 +57,8 @@ internal class NoteHelpers
                 }
                 else
                 {
+                    cursorPosition = 0;
                     cursorRow++;
-                    Console.SetCursorPosition(cursorPosition - editedContent.Length, cursorRow);
                 }
             }
             else if (pressedKey.Key == ConsoleKey.UpArrow)
@@ -68,16 +71,33 @@ internal class NoteHelpers
             }
             else if (pressedKey.Key == ConsoleKey.Backspace)
             {
-                if (!string.IsNullOrEmpty(editedContent))
+                if (cursorPosition > 0)
                 {
-                    editedContent = editedContent.Remove(cursorPosition -1, 1);
+                    editedContent = editedContent.Remove(lineStartPosition - 1, 1);
                     cursorPosition--;
+                }
+                else if (cursorRow > 8 && cursorPosition == 0)
+                {
+                    cursorRow--;
+                    cursorPosition = Console.WindowWidth;
+                    editedContent = editedContent.Remove(lineStartPosition, 1);
                 }
             }
             else
             {
-                editedContent = editedContent.Insert(cursorPosition, pressedKey.KeyChar.ToString());
+                if (cursorPosition != Console.WindowWidth)
+                {
+                editedContent = editedContent.Insert(lineStartPosition, pressedKey.KeyChar.ToString());
                 cursorPosition++;
+                }
+                else
+                {
+                    cursorPosition = 0;
+                    cursorRow++;
+
+                    editedContent = editedContent.Insert(lineStartPosition, pressedKey.KeyChar.ToString());
+                    cursorPosition++;
+                }
             }
             
             Console.Clear();
