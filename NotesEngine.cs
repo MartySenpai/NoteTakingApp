@@ -3,8 +3,7 @@ namespace NoteTakingApp;
 internal class NoteEngine
 {
     NoteHelpers noteHelpers = new();
-    Note note = new();
-
+    
     internal void WriteNote()
     {
         Note note = new();
@@ -41,6 +40,8 @@ internal class NoteEngine
 
     internal void ReadNote()
     {
+        Note note = new();
+
         noteHelpers.ListNotes();
         Console.WriteLine("\nPlease enter the ID for the note you wish to read...");
 
