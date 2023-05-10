@@ -28,7 +28,7 @@ internal class NoteHelpers
         int cursorRow = Console.CursorTop;
 
         int originalCursorPosition = Console.CursorLeft;
-        int originalCursorRow  = Console.CursorTop;
+        int originalCursorRow  = 7;
 
         // Refactor to NoteHelpers
         bool isEditing = true;
@@ -40,7 +40,7 @@ internal class NoteHelpers
 
             // starting cursor row when more than 2 rows are present is wrong, it zeros out the cursor itself.
             // so we need to set it back to the original position.
-            int lineStartPosition = ((cursorRow - originalCursorRow) * Console.WindowWidth) + cursorPosition;
+            int lineStartPosition = ((cursorRow - originalCursorRow) * Console.WindowWidth) + cursorPosition - 1;
 
             if (pressedKey.Key == ConsoleKey.LeftArrow)
             {
@@ -76,6 +76,7 @@ internal class NoteHelpers
             }
             else if (pressedKey.Key == ConsoleKey.Backspace)
             {
+                // LineStartPosition is wrong after jumping up a row.
                 if (cursorPosition > 0)
                 {
                     editedContent = editedContent.Remove(lineStartPosition - 1, 1);
@@ -85,7 +86,7 @@ internal class NoteHelpers
                 {
                     cursorRow--;
                     cursorPosition = Console.WindowWidth;
-                    editedContent = editedContent.Remove(lineStartPosition, 1);
+                    editedContent = editedContent.Remove(lineStartPosition - 1, 1);
                 }
             }
             else
