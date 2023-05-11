@@ -27,9 +27,6 @@ internal class NoteHelpers
         int cursorPosition = Console.CursorLeft;
         int cursorRow = Console.CursorTop;
 
-        int originalCursorPosition = Console.CursorLeft;
-        int originalCursorRow  = 7;
-
         // Refactor to NoteHelpers
         bool isEditing = true;
 
@@ -38,9 +35,7 @@ internal class NoteHelpers
             Console.SetCursorPosition(cursorPosition, cursorRow);
             ConsoleKeyInfo pressedKey = Console.ReadKey(true);
 
-            // starting cursor row when more than 2 rows are present is wrong, it zeros out the cursor itself.
-            // so we need to set it back to the original position.
-            int lineStartPosition = ((cursorRow - originalCursorRow) * Console.WindowWidth) + cursorPosition - 1;
+            int contentLength = editedContent.Length;
 
             if (pressedKey.Key == ConsoleKey.LeftArrow)
             {
@@ -50,12 +45,14 @@ internal class NoteHelpers
                 }
                 else
                 {
-                    cursorPosition = Console.WindowWidth;
+                    cursorPosition = Console.WindowWidth - 1;
                     cursorRow--;
                 }
             }
             else if (pressedKey.Key == ConsoleKey.RightArrow)
             {
+
+                // Add whitespace when moving right after content length.
                 if (cursorPosition < Console.WindowWidth)
                 {
                     cursorPosition++;
@@ -72,28 +69,28 @@ internal class NoteHelpers
             }
             else if (pressedKey.Key == ConsoleKey.DownArrow)
             {
+                // Add whitespace when moving right after content length.
                 cursorRow++;
             }
             else if (pressedKey.Key == ConsoleKey.Backspace)
             {
-                // LineStartPosition is wrong after jumping up a row.
                 if (cursorPosition > 0)
                 {
-                    editedContent = editedContent.Remove(lineStartPosition - 1, 1);
+                    editedContent = editedContent.Remove(contentLength - 1, 1);
                     cursorPosition--;
                 }
                 else if (cursorRow > 7 && cursorPosition <= 0)
                 {
                     cursorRow--;
-                    cursorPosition = Console.WindowWidth;
-                    editedContent = editedContent.Remove(lineStartPosition - 1, 1);
+                    cursorPosition = Console.WindowWidth - 1;
+                    editedContent = editedContent.Remove(contentLength - 1, 1);
                 }
             }
             else
             {
                 if (cursorPosition != Console.WindowWidth)
                 {
-                editedContent = editedContent.Insert(lineStartPosition, pressedKey.KeyChar.ToString());
+                editedContent = editedContent.Insert(contentLength, pressedKey.KeyChar.ToString());
                 cursorPosition++;
                 }
                 else
@@ -101,11 +98,11 @@ internal class NoteHelpers
                     cursorPosition = 0;
                     cursorRow++;
 
-                    editedContent = editedContent.Insert(lineStartPosition, pressedKey.KeyChar.ToString());
+                    editedContent = editedContent.Insert(contentLength, pressedKey.KeyChar.ToString());
                     cursorPosition++;
                 }
             }
-            
+
             Console.Clear();
             Console.WriteLine("Editing Mode:\n");
             Console.WriteLine($"Note-ID {note.ID} - Last modified: {note.Date}\n");
