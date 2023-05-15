@@ -36,6 +36,7 @@ internal class NoteHelpers
             ConsoleKeyInfo pressedKey = Console.ReadKey(true);
 
             int contentLength = editedContent.Length;
+            int currentPositionLength = ((Console.WindowWidth - 1) * (cursorRow - 7)) + cursorPosition;
 
             if (pressedKey.Key == ConsoleKey.LeftArrow)
             {
@@ -69,9 +70,18 @@ internal class NoteHelpers
             }
             else if (pressedKey.Key == ConsoleKey.DownArrow)
             {
-                // Add whitespace when moving right after content length.
                 cursorRow++;
+
+                if (currentPositionLength > contentLength)
+                {
+                    // Debug, spaces not being inserted.
+                    for (int i = contentLength; i < currentPositionLength; i++)
+                    {
+                        editedContent = editedContent.Insert(contentLength, " ");
+                    }
+                }
             }
+            
             else if (pressedKey.Key == ConsoleKey.Backspace)
             {
                 if (cursorPosition > 0)
